@@ -6,8 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,25 +23,10 @@ public class JsonUtils {
         final String SW_IMAGE = "image";
         final String SW_INGREDIENTS = "ingredients";
 
-        final String SW_MESSAGE_COD = "cod";
 
-        // Sandwich object to hold parsed JSON data
         Sandwich sandwich = null;
 
         JSONObject sandwichJSON = new JSONObject(sandwichJsonStr);
-
-        if(sandwichJSON.has(SW_MESSAGE_COD)) {
-            int errorCode = sandwichJSON.getInt(SW_MESSAGE_COD);
-
-            switch (errorCode) {
-                case HttpURLConnection.HTTP_OK:
-                    break;
-                case HttpURLConnection.HTTP_NOT_FOUND:
-                    return null;
-                default:
-                    return null;
-            }
-        }
 
         String mainName;
         List<String> alsoKnownAs;
