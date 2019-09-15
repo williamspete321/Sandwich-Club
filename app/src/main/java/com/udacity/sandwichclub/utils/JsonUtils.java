@@ -23,6 +23,8 @@ public class JsonUtils {
         final String SW_IMAGE = "image";
         final String SW_INGREDIENTS = "ingredients";
 
+        final String SW_FALL_BACK = "Not Available";
+
 
         Sandwich sandwich = null;
 
@@ -41,9 +43,9 @@ public class JsonUtils {
         JSONArray akaArray = jsonNameObject.getJSONArray(SW_AKA);
         alsoKnownAs = parseJSONStringArray(akaArray);
 
-        placeOfOrigin = sandwichJSON.getString(SW_POO);
+        placeOfOrigin = sandwichJSON.optString(SW_POO, SW_FALL_BACK);
 
-        description = sandwichJSON.getString(SW_DESCRIPTION);
+        description = sandwichJSON.optString(SW_DESCRIPTION, SW_FALL_BACK);
 
         image = sandwichJSON.getString(SW_IMAGE);
 

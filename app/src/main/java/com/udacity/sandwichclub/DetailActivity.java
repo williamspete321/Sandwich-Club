@@ -16,6 +16,7 @@ public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
+    private static final String PLACE_HOLDER = "Not Available";
 
     private TextView mMainNameTextView;
     private TextView mAKATextView;
@@ -71,6 +72,8 @@ public class DetailActivity extends AppCompatActivity {
         populateUI(sandwich);
         Picasso.with(this)
                 .load(sandwich.getImage())
+                .placeholder(R.mipmap.ic_launcher_loading)
+                .error(R.mipmap.ic_launcher_error)
                 .into(ingredientsIv);
 
         setTitle(sandwich.getMainName());
@@ -89,16 +92,13 @@ public class DetailActivity extends AppCompatActivity {
                 mAKATextView.append(" " + name + " ");
             }
         }else {
-            // If there's no additional names, remove the TextView
-            mAKATextView.setVisibility(View.GONE);
+            mAKATextView.append(" " + PLACE_HOLDER);
         }
 
         if(!sandwich.getPlaceOfOrigin().equals("")) {
             mOriginNameTextView.setText(sandwich.getPlaceOfOrigin());
         } else {
-            // If there's no Origin, remove the Origin Textviews
-            mOriginLabelTextView.setVisibility(View.GONE);
-            mOriginNameTextView.setVisibility(View.GONE);
+            mOriginNameTextView.setText(PLACE_HOLDER);
         }
 
         for(String ingredient : sandwich.getIngredients()) {
